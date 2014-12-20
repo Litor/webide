@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>menupanel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../avalon.js"></script>
+    <script>
+
+        require(["menupanel/avalon.menupanel"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+    metadata{
+        display: none;
+    }
+</style>
+<div ms-controller="test">
+    <div ms-widget="menupanel" style="width:200px;height:30px;border: 1px solid gray;">
+china
+    </div>
+</div>
+
+</body>
+</html>

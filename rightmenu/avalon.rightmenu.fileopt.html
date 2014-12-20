@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>rightpanel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["rightmenu/avalon.rightmenu.fileopt"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+    metadata{
+        display: none;
+    }
+</style>
+<div ms-controller="test">
+    <div style="width:200px;height:30px;border:1px solid gray;" ms-widget="rightmenu" data-rightpanel-template="menu" data-rightpanel-width="100">
+        china
+    </div>
+</div>
+
+</body>
+</html>

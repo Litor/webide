@@ -1,0 +1,18 @@
+<div class="oni-menupanel-container" ms-visible="show" ms-click="hidePanel">
+    <ul ms-each-el="items"  ms-css-left="left"  ms-css-width="width" ms-css-top="top"
+            ms-class-100="panel-top-left-radius:!radius_topLeft"
+            ms-class-101="panel-top-right-radius:!radius_topRight"
+            ms-class-102="panel-bottom-left-radius:!radius_bottomLeft"
+            ms-class-103="panel-bottom-right-radius:!radius_bottomRight">
+        <li class="oni-menupanel-item" ms-click="el.click(options)" ms-if="!el.divider" ms-class-106="oni-menupanel-sub:el.subitems" ms-mouseenter="toggle(el, this)"><a ms-text="el.value" ></a>
+
+        </li>
+        <li class="divider" ms-if="el.divider"></li>
+        <ul ms-each-el2="el.subitems"  ms-css-left="el.left"  ms-css-width="el.width" ms-css-top="el.top" ms-visible="el.show"
+            ms-class-100="panel-top-left-radius:true"
+            ms-class-102="panel-bottom-left-radius:true">
+            <li ms-click="el2.click(options)" ms-if="!el2.divider"  ms-class-106="oni-menupanel-sub:el2.subitems"><a ms-text="el2.value" ></a></li>
+            <li class="divider" ms-if="el2.divider"></li>
+        </ul>
+    </ul>
+</div>

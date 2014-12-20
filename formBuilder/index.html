@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>doublelist组件</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["fileexplorer/avalon.fileexplorer","codemirror/avalon.codemirror", "menubar/avalon.menubar"], function() {
+            avalon.define("main", function(vm) {
+                vm.codemirror = {
+                    width:1100
+                }
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body ms-controller="main">
+<style>
+    body{
+        padding:0;
+        margin:0;
+    }
+    metadata{
+        display: none;
+    }
+    .top-menu{
+       height: 28px;
+    }
+    .left-menu{
+        float: left;
+    }
+    .main{
+        float: left;
+    }
+</style>
+    <div class="top-menu" ms-widget="menubar"></div>
+    <div class="left-menu" id="#aaa">
+        <div ms-widget="fileexplorer, wisfileexplorer"></div>
+    </div>
+    <div class="main">
+        <div ms-widget="codemirror, wiscodemirror"></div>
+    </div>
+
+</body>
+</html>

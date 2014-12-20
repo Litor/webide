@@ -1,0 +1,60 @@
+.oni-fileexplorer-container{
+    box-sizing: border-box;
+    position: relative;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    white-space: nowrap;
+    padding: 2px 0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.25);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 13px;
+}
+
+.oni-fileexplorer-container ul{
+    display: block;
+    list-style-type: disc;
+    list-style: none;
+    padding: 0 0 0 5px;
+
+}
+
+.oni-fileexplorer-fixoffset{
+    margin-left: 10px;
+}
+.oni-fileexplorer-container li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+    -webkit-user-drag: none;
+    line-height: 18px;
+}
+
+.oni-fileexplorer-container a{
+    position: relative;
+    z-index: 10;
+    color: black;
+    line-height: 21px;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.oni-fileexplorer-container i.fa{
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    width: 10px;
+    padding-right: 2px;
+}
+
+.oni-fileexplorer-container .fa-caret-down:before {
+    content: "\f0d7";
+}
+
+.oni-fileexplorer-container .fa-caret-right:before {
+    content: "\f0da";
+}

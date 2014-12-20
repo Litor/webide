@@ -1,0 +1,17 @@
+<div class="oni-fileexplorer-container" ms-css-width="width" ms-css-height="height">
+    <ul ms-widget="fileexplorer">
+
+    </ul>
+</div>
+{{MS_FILE_EXPLORER}}
+<li
+        data-repeat-rendered="_rescan"
+        ms-repeat-file="files"
+        >
+    <a ms-click="fold(file)" >
+        <i class="fa fa-caret-down" ms-visible= "file.subs" ms-class-011="fa-caret-down:!file.fold" ms-class-012="fa-caret-right:file.fold"></i>
+        <span ms-text="file.name" ms-widget="rightmenu" ms-data-path="file.path"></span>
+    </a>
+    <ul ms-if="!file.fold"  ms-data-widget="'fileexplorer'" ms-data-widget-index="$index" ms-class-11="oni-fileexplorer-fixoffset:true">
+    </ul>
+</li>

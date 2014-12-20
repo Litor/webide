@@ -1,0 +1,98 @@
+.oni-menupanel-container{
+    box-sizing: content-box;
+    font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;
+    font-size: 14px;
+    color:black;
+    display: none;
+}
+
+.oni-menupanel-container ul{
+    position: absolute;
+    z-index: 1000;
+    float: left;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style-type: disc;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background-clip: padding-box;
+}
+.oni-menupanel-container .panel-top-left-radius{
+    border-top-left-radius:0px;
+    -moz-border-radius-topleft: 0px;
+}
+
+.oni-menupanel-container .panel-top-right-radius{
+    border-top-right-radius:0px;
+    -moz-border-radius-topright: 0px;
+}
+
+.oni-menupanel-container .panel-bottom-left-radius{
+    border-bottom-left-radius:0px;
+    -moz-border-radius-bottomleft: 0px;
+}
+
+.oni-menupanel-container .panel-bottom-right-radius{
+    border-bottom-right-radius:0px;
+    -moz-border-radius-bottomright: 0px;
+}
+
+.oni-menupanel-container li{
+    line-height: 18px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+    position: relative;
+}
+
+.oni-menupanel-container li a{
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.oni-menupanel-sub a:after{
+    display: block;
+    content: " ";
+    float: right;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+    border-width: 5px 0 5px 5px;
+    border-left-color: #ccc;
+    margin-top: 5px;
+    margin-right: -10px;
+    border-left-color: #333;
+    position: absolute;
+    top: 2px;
+    right: 20px;
+}
+.oni-menupanel-container li a:hover{
+    background-color: #5a6d7b;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#617482),to(#506371));
+    background-image: -webkit-linear-gradient(top,#617482,#506371);
+    background-image: linear-gradient(to bottom,#617482,#506371);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF617482',endColorstr='#FF506371',GradientType=0);
+    color: white;
+}
+
+.oni-menupanel-container .divider{
+    height: 1px;
+    margin: 8px 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    border-bottom: 1px solid white;
+}
+.oni-rightmenu-hover{
+    background-color: #aaa;
+}

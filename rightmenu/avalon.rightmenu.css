@@ -1,0 +1,60 @@
+.oni-rightmenu-container{
+    box-sizing: content-box;
+    font-family: arial, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', '宋体', \5b8b\4f53, Tahoma, Arial, Helvetica, STHeiti;
+    font-size: 14px;
+}
+
+.oni-rightmenu-container ul{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    background-clip: padding-box;
+}
+.oni-rightmenu-container li{
+    line-height: 18px;
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+.oni-rightmenu-container li a{
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+}
+
+.oni-rightmenu-container li a:hover{
+    background-color: #5a6d7b;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#617482),to(#506371));
+    background-image: -webkit-linear-gradient(top,#617482,#506371);
+    background-image: linear-gradient(to bottom,#617482,#506371);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF617482',endColorstr='#FF506371',GradientType=0);
+    color: white;
+}
+
+.oni-rightmenu-container .divider{
+    height: 1px;
+    margin: 8px 1px;
+    overflow: hidden;
+    background-color: #e5e5e5;
+    border-bottom: 1px solid white;
+}
+.oni-rightmenu-hover{
+    background-color: #aaa;
+}

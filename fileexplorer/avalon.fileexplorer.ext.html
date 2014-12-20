@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>fileExplorer</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["fileexplorer/avalon.fileexplorer"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+    metadata{
+        display: none;
+    }
+</style>
+<div ms-controller="test">
+    <div ms-widget="fileexplorer" data-fileExplorer-height="300">
+
+    </div>
+</div>
+
+</body>
+</html>

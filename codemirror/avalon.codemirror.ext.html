@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>codemirror</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel=stylesheet href="codemirror/doc/docs.css">
+
+
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["codemirror/avalon.codemirror"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+    metadata{
+        display: none;
+    }
+</style>
+<div ms-controller="test">
+    <div ms-widget="codemirror">
+
+    </div>
+</div>
+
+</body>
+</html>
