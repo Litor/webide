@@ -1,0 +1,15 @@
+<div class="oni-layout-container">
+    <div ms-click="merge" class="oni-layout-button">合并</div>
+    <div ms-click="split" class="oni-layout-button">拆分</div>
+    <div class="container">
+        <div class="row oni-layout-row" ms-repeat-row="rows" ms-data-index="$index">
+            <div class="oni-layout-grid" ms-repeat-col="row.cols" ms-class-100="col-md-{{col.colspan}}"
+                ms-class-101 = "col-sm-{{col.colspan}}"
+                ms-class-102 = "col-xs-{{col.colspan}}"
+                ms-class-103 = "oni-layout-selected:col.selected"
+                ms-class-104 = "col-lg-{{col.colspan}}" style="border:1px solid gray;" ms-click="select($index, row)">
+            <div ms-widget="menupanel" style="width:50px;">china</div>
+            </div>
+        </div>
+    </div>
+</div>

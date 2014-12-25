@@ -1,0 +1,17 @@
+<div class="oni-combox-container">
+    <div class="oni-combox-input" ms-css-width="width+1" ms-hover="oni-combox-input-hover">
+        <input ms-css-width="width-33" ms-click="click($event)" ms-duplex="showvalue"/><span ms-click="click($event)"></span>
+        <input type="hidden" ms-duplex="value" >
+    </div>
+    <div class="oni-combox-panel" ms-visible="showpanel" ms-css-width="panelwidth+1">
+        <ul ms-each-el="demo">
+            <li ms-hover="oni-combox-hover" ms-click="_select($event, el.id, el.showText)">{{el.showText}}</li>
+        </ul>
+        <div class="ms-combox-more" ms-hover="oni-combox-more-hover"  ms-click="show('comboxdialog'+$uid)">更多</div>
+    </div>
+    <div ms-widget="dialog,comboxdialog{{MS_COMBOX_ID}}">
+        <div ms-widget="smartgrid, smartgrid{{MS_COMBOX_ID}}"></div>
+    </div>
+
+</div>
+

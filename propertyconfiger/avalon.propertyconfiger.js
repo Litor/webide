@@ -3,7 +3,7 @@
  * @enName propertyconfiger
  * @introduce
  */
-define(["avalon", "text!./avalon.propertyconfiger.html", "css!./avalon.propertyconfiger.css"], function(avalon, template) {
+define(["avalon", "text!./avalon.propertyconfiger.html", "css!./avalon.propertyconfiger.css", "../property/avalon.property.js"], function(avalon, template) {
     /**
     *   templateArr = template.split('MS_OPTION_EJS');
     */
@@ -13,11 +13,12 @@ define(["avalon", "text!./avalon.propertyconfiger.html", "css!./avalon.propertyc
         vmId = data.propertyconfigerId;
         options.template = options.getTemplate(template, options);
 
+        var dom = avalon.parseHTML(options.template);
         //var currentFormComponents = avalon.vmodels['$formbuilder'].getCurrentFormComponents();
 
-        var currentFormComponents = [{pageName:'main', properties:[{propertyName:'pageTitle', propertyValue:'first page'}], type:'searchGrid', widgets:[
-            {widgetName:'widget', nickName:'widget1', parentWidget:'parent1', parentProperty:'property1', tableX:'1', tableY:'1', properties:[
-                {propertyName:'name1', propertyType:'string', propertyValue:'name1'}]}
+        var currentFormComponents = [{pageName:'main', properties:[{propertyName:'pageTitle', propertyValue:'first page'}], type:'searchGrid', components:[
+            {componentName:'widget', componentNickName:'widget1', parentComponent:'parent1', parentProperty:'property1', tableX:'1', tableY:'1', properties:[
+                {propertyName:'name1', propertyType:'string', detail:{propertyValue:'name1'}}]}
         ]}]
 
         var originalProperties = null;
@@ -56,11 +57,18 @@ define(["avalon", "text!./avalon.propertyconfiger.html", "css!./avalon.propertyc
             widgetElement : element,
             $skipArray : ["widgetElement", "template"],
             $uid : id,
+            change : function (prop, value) {
+                alert();
+            },
             $init :  function (continueScan) {
                 if (inited) return;
                 inited = true;
                 vmodel.template = vmodel.template.replace(/\{\{MS_COMBOX_ID\}\}/g, id);
-                element.innerHTML = vmodel.template;
+                for(var i = 0; i < vmodel.properties.length; i++){
+                    var PropertyItem =  document.createElement("div");
+                    PropertyItem.innerHTML = "<div ms-widget='"+properties[i].type+"'></div>";
+                    element.appendChild(PropertyItem);
+                }
 
                 if (continueScan) {
                     continueScan();

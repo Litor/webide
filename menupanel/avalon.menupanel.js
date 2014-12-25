@@ -58,6 +58,9 @@ define(["avalon", "text!./avalon.menupanel.html", "css!./avalon.menupanel.css"],
             hidePanel : function () {
                 vmodel.show = false;
             },
+            $remove: function () {
+
+            },
             $init :  function (continueScan) {
                 if (inited) return;
                 inited = true;

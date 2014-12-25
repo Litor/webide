@@ -1,0 +1,25 @@
+.oni-layout-container{
+
+}
+.oni-layout-button{
+    width:60px;
+    height:25px;
+    background-color: gray;
+    cursor: pointer;
+    color:white;
+    text-align: center;
+    line-height: 25px;
+    display: inline-block;
+}
+
+.oni-layout-row{
+    margin-top: 2px;
+}
+
+.oni-layout-selected{
+    background-color: #dedede;
+}
+
+.oni-layout-grid{
+    cursor: pointer;
+}

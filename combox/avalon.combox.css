@@ -1,0 +1,86 @@
+metadata{
+    display: none;
+}
+.oni-combox-container {
+    position: relative;
+}
+.oni-combox-container *{
+    font: normal 12px tahoma, arial, helvetica, sans-serif;
+    margin:0;
+    padding:0;
+}
+.oni-combox-input *{
+    box-sizing: content-box;
+}
+.oni-combox-input{
+    border: 1px solid #CCC;
+    border-bottom: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+    height: 25px;
+}
+.oni-combox-input span{
+    display: inline-block;
+    width: 33px;
+    height: 25px;
+    border-left:1px solid #ddd;
+    background: url(img/button2.png) no-repeat 0 0px;
+}
+.oni-combox-input input{
+    height: 25px;
+    line-height: 25px;
+    outline: none;
+    float: left;
+    font-size:16px;
+    padding:0;
+    box-sizing: content-box;
+    border: 0px;
+    font: normal 14px tahoma, arial, helvetica, sans-serif;;
+}
+.oni-combox-panel{
+    position: absolute;
+    left:0px;
+    top: 25px;
+    border:1px solid #ddd;
+    width: 200px;
+    height: 250px;
+    box-sizing: content-box;
+}
+.oni-combox-panel ul{
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+}
+.oni-combox-panel li{
+    list-style: none;
+    padding: 5px 6px;
+    cursor: pointer;
+    height: 18px;
+    line-height: 18px;
+
+}
+.oni-combox-hover{
+    background-color: #eee;
+}
+.ms-combox-more{
+    width: 100%;
+    height: 20px;
+    line-height: 20px;
+    background-color: #e5e5e5;
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 0px;
+    color: #999;
+}
+.oni-combox-input-hover{
+    border-color:#ababab #ccc #ccc #ababab
+}
+
+.oni-combox-input-hover span{
+    background-position: -50px 0px;
+}
+.oni-combox-more-hover{
+    background-color:#ddd ;
+}
