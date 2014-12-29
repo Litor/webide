@@ -1,0 +1,54 @@
+<div class="oni-singlepageapp-container">
+    <div class="oni-singlepageapp-header" style=" height: 30px">
+        <nav class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="javascript:void(0)">EMAP</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li ms-repeat-menu="topmenu" ms-class-active="menu.path == currentAppId" ms-click="changeMenu(menu)">
+                            <a ms-href="#!/{{menu.path}}" ms-text="menu.name"></a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>
+                                    <h4> &nbsp;angsmarty@gmail.com</h4>
+                                </li>
+                                <li><a href="#">个人设置</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">退出登录</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="oni-singlepageapp-leftNav" ms-css-height="leftHeight">
+        <ul class="nav nav-pills nav-stacked" role="tablist">
+            <li role="presentation" ms-repeat-module="modules" ms-class-active="currentModuleId==module.id">
+                <a  ms-if="!module.subModules" ms-href="#!/{{module.appId}}/{{module.id}}" ms-text="module.title" ms-click="selectModule(module.appId, module.id)"></a>
+                <a  ms-if="module.subModules" href="javascript:void(0)" ms-text="module.title"></a>
+                <div ms-if="module.subModules">
+                    <ul class="nav nav-pills nav-stacked" role="tablist" >
+                        <li role="presentation" ms-repeat-submodule="module.subModules" ms-class-active="currentModuleId==submodule.id">
+                            <a  ms-href="#!/{{submodule.appId}}/{{submodule.id}}"  ms-click="selectModule(submodule.appId, submodule.id)"><span class="oni-singlepageapp-submodule"  ms-text="submodule.title"></span></a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="oni-singlepageapp-main" ms-css-width="contentWidth">
+        <div class="oni-singlepageapp-path" ms-text="currentPath">
+                sys / account
+        </div>
+        <iframe src="iframe.html" frameborder="0" style="margin: 0 !important;" id="contentIframe"></iframe>
+    </div>
+</div>

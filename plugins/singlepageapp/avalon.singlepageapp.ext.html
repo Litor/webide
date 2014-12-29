@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>singlepageapp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="../lib/bootstrap/jquery.min.js"></script>
+    <script src="../lib/bootstrap/bootstrap.min.js"></script>
+    <script src="../avalon.js"></script>
+    <script src="../plugins/highlight/shCore.js"></script>
+    <script>
+
+        require(["singlepageapp/avalon.singlepageapp"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: sans-serif, "Helvetica Neue", "Microsoft Yahei", "SimHei";
+    }
+</style>
+<div ms-controller="test">
+    <div ms-widget="singlepageapp">
+
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>singlepageapp</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <script src="../lib/bootstrap/jquery.min.js"></script>
+    <script src="../lib/bootstrap/bootstrap.min.js"></script>
+    <script src="../avalon.js"></script>
+    <script src="../plugins/highlight/shCore.js"></script>
+    <script>
+        function reload(module, treeData, data){
+            avalon.vmodels = {};
+            document.getElementById("mainContainer").setAttribute("ms-widget", module);
+            document.getElementById("mainContainer").removeAttribute("avalonctrl");
+            document.getElementById("mainController").setAttribute("ms-controller", "mainController");
+            document.getElementById("mainController").removeAttribute("avalonctrl");
+            require([module+"/avalon."+module], function() {
+                avalon.define("mainController", function(vm) {
+                    vm[module] = {};
+                    for(attr in data){
+                        vm[module][attr] = data[attr];
+                    }
+                })
+
+                avalon.scan();
+            })
+        }
+
+    </script>
+</head>
+<body>
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        font-family: sans-serif, "Helvetica Neue", "Microsoft Yahei", "SimHei";
+    }
+</style>
+<div id="mainController" ms-controller="mainController">
+    <div id="mainContainer">
+
+    </div>
+    <div>
+        <div class="oni-singlepageapp-tree">
+            <div class="oni-singlepageapp-tree-toolbar">
+                treeTitle
+            </div>
+            <div class="oni-singlepageapp-tree-real">
+                tree
+            </div>
+        </div>
+        <div class="oni-singlepageapp-content" ms-css-height="contentHeight">
+            <!--<div class="oni-singlepageapp-content-toolbar">
+                <div class="borderDiv" style="margin: 2px 3px; height: 30px;line-height: 30px">
+                    <button type="button" class="btn btn-success">Success</button>
+                    <button type="button" class="btn btn-danger">Danger</button>
+                    <button type="button" class="btn btn-primary">Primary</button>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Action <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>-->
+            <div class="oni-singlepageapp-content-real">
+                <div id="mainContainer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

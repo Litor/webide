@@ -1,0 +1,24 @@
+<div class="oni-layout-container">
+    <div ms-click="merge" class="oni-layout-button">合并</div>
+    <div ms-click="split" class="oni-layout-button">拆分</div>
+    <div ms-click="insert" class="oni-layout-button">插入</div>
+    <div ms-click="clear" class="oni-layout-button">清除</div>
+    <div class="container">
+        <div class="row oni-layout-row" ms-repeat-row="rows" ms-data-index="$index"  ms-css-height="row.height">
+            <div class="oni-layout-grid" ms-class-100="col-md-1"
+                 ms-class-101 = "col-sm-1"
+                 ms-class-102 = "col-xs-1"
+                 ms-class-104 = "col-lg-1" style="border:1px solid gray;"  ms-css-height="row.height">
+            <input ms-duplex="row.height" style="width: 50px;"/>
+                </div>
+            <div class="oni-layout-grid" ms-repeat-col="row.cols" ms-class-100="col-md-{{col.colspan}}"
+                 ms-css-height="row.height"
+                ms-class-101 = "col-sm-{{col.colspan}}"
+                ms-class-102 = "col-xs-{{col.colspan}}"
+                ms-class-103 = "oni-layout-selected:col.selected"
+                ms-class-104 = "col-lg-{{col.colspan}}" style="border:1px solid gray;" ms-click="select($index, row)">
+            <div ms-html="col.html"></div>
+            </div>
+        </div>
+    </div>
+</div>

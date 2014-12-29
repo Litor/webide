@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jqgrid</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="../../lib/jquery.jqgrid/css/ui.jqgrid.css">
+    <script src="../../lib/jquery.js"></script>
+    <link rel="stylesheet" href="../../lib/jquery-ui/jquery-ui.css">
+    <link rel="stylesheet" href="../../lib/jquery-ui/theme.css">
+    <script src="../../lib/jquery.jqgrid/js/jquery.jqGrid.src.js"></script>
+    <script src="../../lib/jquery.jqgrid/js/i18n/grid.locale-cn.js"></script>
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["jqgrid/avalon.jqgrid"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+
+</style>
+<div ms-controller="test">
+    <div ms-widget="jqgrid">
+        <column label="Category Name" name="CategoryName" width=""></column>
+        <column label="Product Name" name="ProductName" width="90"></column>
+        <column label="Country" name="Country" width="100"></column>
+        <column label="Price" name="Price" width="80"></column>
+        <column label="Quantity" name="Quantity" width="80"></column>
+    </div>
+</div>
+
+</body>
+</html>
