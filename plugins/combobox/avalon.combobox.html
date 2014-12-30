@@ -1,13 +1,14 @@
 <div class="oni-combobox-container"  ms-css-width="width">
     <div class="input-group">
-        <input type="text" class="form-control dropdown-toggle" data-toggle="dropdown" ms-attr-value="selectedValue">
+        <input type="text" class="form-control dropdown-toggle"  ms-duplex="selectedValue" ms-keyup="search"
+               ms-click="showPanel($event)" ms-change="clearWhenNoSelect">
         <input type="hidden" ms-attr-value="selectedKey" ms-attr-id="{{id}}">
-        <div class="input-group-btn dropdown-toggle" data-toggle="dropdown">
+        <div class="input-group-btn dropdown-toggle" ms-click="showPanel($event)">
             <button type="button" class="btn btn-default">
                 <span class="caret"></span>
             </button>
         </div>
-        <ul class="dropdown-menu pull-left" ms-css-width="boxWidth">
+        <ul class="dropdown-menu pull-left" ms-css-width="boxWidth" ms-visible="panelVisible">
             <li ms-repeat-item="items">
                 <a href="#" ms-text="item.value"
                    ms-click="selectedItem(item.key, item.value)"></a>
@@ -21,6 +22,7 @@
                 </li>
                 <li ms-class-101="disabled:next" ms-click="nextPage($event)"><a href="#">&raquo;</a></li>
             </ul></li>
+            <li ms-if="items.length == 0" ms-text="noResult"></li>
         </ul>
     </div>
 </div>

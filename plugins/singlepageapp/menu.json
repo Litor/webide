@@ -1,0 +1,29 @@
+[
+  {"title": "系统管理", "id":"1", "active":true, "modules":[
+    {"title":"权限管理",  "modules":[
+      {"title":"用户管理", "id":"2", "url":"2"},
+      {"title":"角色管理", "id":"3", "url":"3"}
+    ]},
+    {
+      "title": "帐号申请",
+      "id":"4",
+      "url":"iframe.html"
+    },
+    {
+      "title": "角色申请",
+      "id":"5",
+      "url":"/1/142"
+    }
+  ]},{"title": "开发平台", "active":false, "modules":[
+    {
+      "url": "iframe.html",
+      "id":"6",
+      "title": "服务管理"
+    },
+    {
+      "url": "22",
+      "id":"7",
+      "title": "APP管理"
+    }
+  ]}
+]

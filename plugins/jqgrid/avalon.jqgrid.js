@@ -19,7 +19,7 @@ define(["avalon", "text!./avalon.jqgrid.html", "css!./avalon.jqgrid.css"], funct
         return;
     }
 
-    function buildData(fields, obj){
+    function collectModelData(fields, obj){
         var data = [];
         for(var i = 0; i < fields.length; i++){
             var t = {};
@@ -38,7 +38,7 @@ define(["avalon", "text!./avalon.jqgrid.html", "css!./avalon.jqgrid.css"], funct
         vmId = data.jqgridId;
         options.template = options.getTemplate(template, options);
 
-        var colModel = buildData(element.children);
+        var colModel = collectModelData(element.children);
         var inited, id = +(new Date());
 
         var vm = avalon.mix({

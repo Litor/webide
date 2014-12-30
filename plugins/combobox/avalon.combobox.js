@@ -31,6 +31,7 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
         options.selectedKey= '';
         options.previous = false;
         options.next = false;
+        options.panelVisible = false;
 
         var vm = avalon.mix({
             $id : vmId,
@@ -39,6 +40,28 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
             $uid : id,
             items:[],
             currentPage:1,
+            showPanel: function (e) {
+              vmodel.panelVisible = !vmodel.panelVisible;
+                if(vmodel.panelVisible){
+                    setItems();
+                }
+                e.stopPropagation();
+            },
+            clearWhenNoSelect : function(){
+                if(vmodel.selectedKey == ""){
+                    vmodel.selectedValue = "";
+                }
+            },
+            search: function () {
+                vmodel.panelVisible = true;
+                if(vmodel.dataType == "server"){
+                    vmodel.selectedKey = "";
+                    getServerData(vmodel.selectedValue);
+                }else if(vmodel.dataType == "local"){
+                    vmodel.selectedKey = "";
+                    reloadLocalData(vmodel.selectedValue);
+                }
+            },
             changePage: function (e, page) {
                 changePageAction(page);
                 e.stopPropagation();
@@ -74,6 +97,18 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
 
         var vmodel = avalon.define(vm);
 
+        avalon(document).bind("click", function () {
+            vmodel.panelVisible = false;
+        });
+
+        function reloadLocalData(keyword){
+            vmodel.items = [];
+            for(var i = 0; i < vmodel.localData.length; i++){
+                if(vmodel.localData[i].value.indexOf(keyword)>=0){
+                    vmodel.items.push(vmodel.localData[i]);
+                }
+            }
+        }
         function changePageAction(page){
             vmodel.currentPage = page;
             for(var i = 0; i < vmodel.pages.length; i++){
@@ -89,12 +124,14 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
 
         }
 
-        function getServerData(){
+        function getServerData(keyword){
             async.url = vmodel.url;
             var data = {
                 pagesize: vmodel.pageSize,
-                pageindex: vmodel.currentPage
+                pageindex: vmodel.currentPage,
+                keyword: keyword
             }
+
             avalon.ajax(avalon.mix({
                     data: data
                 },
@@ -195,6 +232,10 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
          * width: 下拉框宽度
          * */
         width:'200',
+        /**
+         * noResult: 无结果显示时的提示信息
+         * */
+        noResult:'无数据...',
         getTemplate: function (str, options) {
             return str;
         }

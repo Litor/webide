@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>singlepageapp</title>
+    <title>layoutrow</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -11,7 +11,7 @@
     <script src="../highlight/shCore.js"></script>
     <script>
 
-        require(["singlepageapp/avalon.singlepageapp"], function() {
+        require(["layoutrow/avalon.layoutrow"], function() {
             avalon.define("test", function(vm) {
                 vm.name = "tstttt";
             })
@@ -22,15 +22,10 @@
 </head>
 <body>
 <style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
-        font-family: sans-serif, "Helvetica Neue", "Microsoft Yahei", "SimHei";
-    }
+
 </style>
-<div ms-controller="test">
-    <div ms-widget="singlepageapp">
+<div ms-controller="test" class="container">
+    <div ms-widget="layoutrow">
 
     </div>
 </div>

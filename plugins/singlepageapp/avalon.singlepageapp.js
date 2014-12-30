@@ -3,30 +3,55 @@
  * @enName singlepageapp
  * @introduce
  */
-define(["avalon", "text!./avalon.singlepageapp.html", "css!./avalon.singlepageapp.css"], function(avalon, template) {
+define(["avalon", "text!./avalon.singlepageapp.html", "css!./avalon.singlepageapp.css", "./mmRequest"], function(avalon, template) {
     /**
     *   templateArr = template.split('MS_OPTION_EJS');
     */
+    var undefine = void 0
+
     var widget = avalon.ui.singlepageapp = function (element, data, vmodels) {
         var options = data.singlepageappOptions,
         $element = avalon(element),
         vmId = data.singlepageappId;
         options.template = options.getTemplate(template, options);
+        var menu = [];
+
+        var async = {
+            enable: false,
+            url: "",
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            autoParam: [],
+            dataFilter: undefine,
+            otherParam: {},
+            type: "post"
+        }
 
         var inited, id = +(new Date());
+
+        options.topmenu = [];
+        options.modules = [];
+        options.currentMenuIndex = 1;
+        options.currentModuleUrl = "";
+        options.currentPath = "";
+        options.contentWidth = 0;
+        options.contentHeight = 0;
+        options.leftHeight = 0;
 
         var vm = avalon.mix({
             $id : vmId,
             widgetElement : element,
             $skipArray : ["widgetElement", "template"],
             $uid : id,
-            changeMenu: function (menu) {
-                vmodel.currentAppId = menu.path;
-                resetModules(menu.path);
+            changeMainMenu: function (menuIndex) {
+                vmodel.currentMenuIndex = menuIndex;
+                vmodel.modules = findModules(menuIndex);
+                setDefaultModule();
             },
-            selectModule: function (appId, moduleId) {
-                vmodel.currentPath = appId + "/" + moduleId;
-                vmodel.currentModuleId = moduleId;
+            selectModule: function (module) {
+                var menu = getCurrentMenu();
+                vmodel.currentPath = menu.title + "->" + module.title;
+                vmodel.currentModuleUrl = module.url;
             },
             $init :  function (continueScan) {
                 if (inited) return;
@@ -34,14 +59,67 @@ define(["avalon", "text!./avalon.singlepageapp.html", "css!./avalon.singlepageap
                 vmodel.template = vmodel.template.replace(/\{\{MS_COMBOX_ID\}\}/g, id);
                 element.innerHTML = vmodel.template;
 
+                configMenu();
 
                 if (continueScan) {
                     continueScan();
                 }
+
             }
         }, options);
 
         var vmodel = avalon.define(vm);
+
+        function getCurrentMenu(){
+            for(var i = 0;i < menu.length; i++){
+                if(menu[i].index == vmodel.currentMenuIndex){
+                    return menu[i];
+                }
+            }
+        }
+
+        function configMenu(){
+            async.url = options.menu;
+            avalon.ajax(avalon.mix({},
+                async)).done(function(res) {
+                if(typeof(res) === 'object'){
+                    menu = res;
+                    var index = 1;
+                    for(var i = 0;i < res.length; i++){
+                        res[i].index = index++;
+                        var t = {title:res[i].title, active:res[i].active, index:res[i].index};
+                        vmodel.topmenu.push(t);
+                        vmodel.modules = findModules(vmodel.currentMenuIndex);
+                        setDefaultModule();
+                    }
+                }else{
+                    throw Error("菜单读取错误"+res);
+                }
+
+            });
+        }
+
+        function setDefaultModule(){
+            var currentMenu = getCurrentMenu();
+            var modules = findModules(currentMenu.index);
+            if(modules.length>0){
+                if(!modules[0].subModules){
+                    vmodel.currentModuleUrl = modules[0].url;
+                    vmodel.currentPath = currentMenu.title + "->" + modules[0].title;
+                }else{
+                    vmodel.currentModuleUrl = modules[0].subModules[0].url;
+                    vmodel.currentPath = currentMenu.title + "->" + modules[0].subModules[0].title;
+                }
+            }
+        }
+
+        function findModules(menuIndex){
+            for(var i = 0; i < menu.length; i++){
+                if(menu[i].index == menuIndex){
+                    return menu[i].modules;
+                }
+            }
+        }
 
         function resetWindowSize() {
             var windowHeight = document.getElementsByTagName("body")[0].offsetHeight;
@@ -54,65 +132,6 @@ define(["avalon", "text!./avalon.singlepageapp.html", "css!./avalon.singlepageap
             vmodel.leftHeight = leftHeight;
         }
 
-        function resetModules(path){
-            vmodel.modules.splice(0, vmodel.modules.length);
-            if(path == 2){
-
-                var modules = [
-                    {
-                        "id": "21",
-                        appId: '2',
-                        "title": "服务管理"
-                    },
-                    {
-                        "id": "22",
-                        appId: '2',
-                        "title": "APP管理"
-                    }
-                ];
-                pushModules(modules);
-            }else if(path == 'sys'){
-                var modules =  [{
-                    "id": "10",
-                    "title": "权限管理",
-                    appId: 'sys',
-                    "subModules": [
-                        {
-                            "id": "111",
-                            "title": "用户管理",
-                            appId: 'sys',
-                            "url":"/1/121"
-                        },
-                        {
-                            "id": "121",
-                            "title": "角色管理",
-                            appId: 'sys',
-                            "url":"/1/131"
-                        }
-                    ]
-                },
-                    {
-                        "id": "account",
-                        "title": "帐号申请",
-                        appId: 'sys',
-                        "url":"/1/141"
-                    },
-                    {
-                        "id": "role",
-                        "title": "角色申请",
-                        appId: 'sys',
-                        "url":"/1/142"
-                    }]
-                pushModules(modules);
-            }
-
-            function pushModules(modules){
-                for(var i = 0; i < modules.length; i++){
-                    vmodel.modules.push(modules[i]);
-                }
-            }
-        }
-
         window.onresize = function () {
             resetWindowSize();
         }
@@ -123,44 +142,8 @@ define(["avalon", "text!./avalon.singlepageapp.html", "css!./avalon.singlepageap
     };
 
     widget.defaults = {
-        leftHeight:'400',
-        contentWidth:'1',
-        contentHeight:'1',
-        currentPath:'sys/111',
-        currentModuleId:'111',
-        currentAppId:'sys',
-        topmenu:[{name:'系统管理', path:'sys', active:true}, {name:'开发平台', path:'2', active:true}],
-        modules:[{
-            "id": "10",
-            "title": "权限管理",
-            appId: 'sys',
-            "subModules": [
-                {
-                    "id": "111",
-                    "title": "用户管理",
-                     appId: 'sys',
-                    "url":"/1/121"
-                },
-                {
-                    "id": "121",
-                    "title": "角色管理",
-                    appId: 'sys',
-                    "url":"/1/131"
-                }
-            ]
-        },
-            {
-                "id": "account",
-                "title": "帐号申请",
-                appId: 'sys',
-                "url":"/1/141"
-            },
-            {
-                "id": "role",
-                "title": "角色申请",
-                appId: 'sys',
-                "url":"/1/142"
-            }],
+        menu:'menu.json',
+        loginOutUrl:'loginout.html',
         getTemplate: function (str, options) {
             return str;
         }

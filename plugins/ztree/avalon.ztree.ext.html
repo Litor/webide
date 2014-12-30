@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>singlepageapp</title>
+    <title>ztree</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
-    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <script src="../../lib/jquery.js"></script>
-    <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../lib/ztree/css/zTreeStyle/zTreeStyle.css" type="text/css">
+    <script src="../../lib/ztree/js/jquery.ztree.core-3.5.min.js"></script>
+    <script src="../../lib/ztree/js/jquery.ztree.excheck-3.5.min.js"></script>
+    <script src="../../lib/ztree/js/jquery.ztree.exedit-3.5.min.js"></script>
     <script src="../avalon.js"></script>
     <script src="../highlight/shCore.js"></script>
     <script>
 
-        require(["singlepageapp/avalon.singlepageapp"], function() {
+        require(["ztree/avalon.ztree"], function() {
             avalon.define("test", function(vm) {
                 vm.name = "tstttt";
             })
@@ -22,15 +24,10 @@
 </head>
 <body>
 <style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
-        font-family: sans-serif, "Helvetica Neue", "Microsoft Yahei", "SimHei";
-    }
+
 </style>
 <div ms-controller="test">
-    <div ms-widget="singlepageapp">
+    <div ms-widget="ztree">
 
     </div>
 </div>
