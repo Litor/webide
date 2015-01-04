@@ -59,14 +59,14 @@ define(["avalon", "text!./avalon.jqgrid.html", "css!./avalon.jqgrid.css"], funct
                 }
                 jQuery(element.children[0].children[0]).jqGrid({
                     url: vmodel.url,
-                    datatype: vmodel.dataType,
+                    datatype: vmodel.datatype,
                     colModel: colModel,
                     viewrecords: vmodel.viewrecords, // show the current page, data rang and total records on the toolbar
                     width: vmodel.width,
                     height: vmodel.height,
-                    rowNum: vmodel.rowNum,
+                    rowNum: vmodel.rownum,
                     loadonce: true,
-                    pager: jQuery(element.children[0].children[1])
+                    pager: vmodel.pager?jQuery(element.children[0].children[1]):''
                 })
 
 
@@ -84,13 +84,13 @@ define(["avalon", "text!./avalon.jqgrid.html", "css!./avalon.jqgrid.css"], funct
          * */
         url:'data.json',
         /**
-         * dataType: 数据格式
+         * datatype: 数据格式
          * */
-        dataType:'json',
+        datatype:'json',
         /**
-         * rowNum: 每页显示条数
+         * rownum: 每页显示条数
          * */
-        rowNum:'30',
+        rownum:'30',
         /**
          * width: grid宽度
          * */
@@ -103,6 +103,10 @@ define(["avalon", "text!./avalon.jqgrid.html", "css!./avalon.jqgrid.css"], funct
          * viewrecords:是否显示总记录数
          * */
         viewrecords:true,
+        /**
+         * pager: 是否需要分页
+         * */
+        pager: true,
         getTemplate: function (str, options) {
             return str;
         }

@@ -1,22 +1,23 @@
 // avalon 1.3.6
 /**
- * @enName rightmenu
+ * @enName contextmenu
  * @introduce
  */
-define(["avalon", "text!./avalon.rightmenu.html", "css!./avalon.rightmenu.css"], function (avalon, template) {
+define(["avalon", "text!./avalon.contextmenu.html", "css!./avalon.contextmenu.css"], function (avalon, template) {
 
-    var widget = avalon.ui.rightmenu = function (element, data, vmodels) {
-        var options = data.rightmenuOptions,
+    var widget = avalon.ui.contextmenu = function (element, data, vmodels) {
+        var options = data.contextmenuOptions,
             $element = avalon(element),
-            vmId = data.rightmenuId,
+            vmId = data.contextmenuId,
             popup;
         options.template = options.getTemplate(template, options);
         var inited, id = +(new Date());
-        options.path = avalon(element).data("path");
+        options.id = avalon(element).data("id");
+        options.params = avalon(element).data("params");
 
         var vmodel = avalon.define({
             $id: vmId,
-            $skipArray : ["widgetElement", "template"],
+            $skipArray : ["id", "params", "widgetElement", "template"],
             $uid : id,
             menuData :  options.menu,
             showMenu : false,
@@ -24,6 +25,9 @@ define(["avalon", "text!./avalon.rightmenu.html", "css!./avalon.rightmenu.css"],
             options :options,
             hidePanel : function (e) {
                 vmodel.showMenu = false;
+            },
+            $remove: function () {
+
             },
             $init :  function (continueScan) {
                 var _vmodels = [vmodel].concat(vmodels)
@@ -75,7 +79,7 @@ define(["avalon", "text!./avalon.rightmenu.html", "css!./avalon.rightmenu.css"],
         return vmodel;
     };
 
-    avalon.ui.rightmenu.AddExtention = function (defaultsExt) {
+    avalon.ui.contextmenu.AddExtention = function (defaultsExt) {
         if(defaultsExt) avalon.mix(true, widget.defaults, defaultsExt);
     }
 

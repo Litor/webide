@@ -1,5 +1,5 @@
 <div class="oni-singlepageapp-container">
-    <div class="oni-singlepageapp-header" style=" height: 33px">
+    <div class="oni-singlepageapp-header"  style="height: 33px">
         <nav class="navbar navbar-default" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -20,7 +20,7 @@
                                 </li>
                                 <li><a href="#">个人设置</a></li>
                                 <li class="divider"></li>
-                                <li><a ms-attr-href="{{loginOutUrl}}">退出登录</a></li>
+                                <li><a ms-attr-href="{{loginouturl}}">退出登录</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -31,13 +31,13 @@
 
     <div class="oni-singlepageapp-leftNav" ms-css-height="leftHeight">
         <ul class="nav nav-pills nav-stacked" role="tablist">
-            <li role="presentation" ms-repeat-module="modules" ms-class-active="currentModuleUrl==module.url">
-                <a  ms-if="!module.modules" ms-href="#!/{{module.url}}" ms-text="module.title" ms-click="selectModule(module)"></a>
-                <a  ms-if="module.modules" href="javascript:void(0)" ms-text="module.title"></a>
-                <div ms-if="module.modules">
+            <li role="presentation" ms-repeat-module="modules" ms-class-active="currentModuleId==module.id">
+                <a  ms-if="module.noSubModules" ms-href="#!/{{module.id}}" ms-text="module.title" ms-click="selectModule(module)"></a>
+                <a  ms-if="!module.noSubModules" href="javascript:void(0)" ms-text="module.title"></a>
+                <div ms-if="!module.noSubModules">
                     <ul class="nav nav-pills nav-stacked" role="tablist" >
-                        <li role="presentation" ms-repeat-submodule="module.modules" ms-class-active="currentModuleUrl==submodule.url">
-                            <a  ms-href="#!/{{submodule.url}}"  ms-click="selectModule(submodule)"><span class="oni-singlepageapp-submodule"  ms-text="submodule.title"></span></a>
+                        <li role="presentation" ms-repeat-submodule="module.modules" ms-class-active="currentModuleId==submodule.id">
+                            <a  ms-href="#!/{{submodule.id}}"  ms-click="selectModule(submodule)"><span class="oni-singlepageapp-submodule"  ms-text="submodule.title"></span></a>
                         </li>
                     </ul>
                 </div>

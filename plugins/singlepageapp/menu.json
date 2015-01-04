@@ -1,29 +1,287 @@
-[
-  {"title": "系统管理", "id":"1", "active":true, "modules":[
-    {"title":"权限管理",  "modules":[
-      {"title":"用户管理", "id":"2", "url":"2"},
-      {"title":"角色管理", "id":"3", "url":"3"}
-    ]},
+{
+  "id": null,
+  "result": [
     {
-      "title": "帐号申请",
-      "id":"4",
-      "url":"iframe.html"
+      "id": "01",
+      "title": "系统管理",
+      "modules": [
+        {
+          "id": "01001",
+          "title": "用户管理",
+          "modules": [],
+          "url": "/admin/userMgr/userInfo"
+        },
+        {
+          "id": "01002",
+          "title": "角色管理",
+          "modules": [],
+          "url": "/admin/roleMgr/roleInfo"
+        },
+        {
+          "id": "01003",
+          "title": "菜单管理",
+          "modules": [],
+          "url": "/admin/menu/menu"
+        },
+        {
+          "id": "01004",
+          "title": "元数据查看",
+          "modules": [],
+          "url": "/admin/table/list"
+        },
+        {
+          "id": "01005",
+          "title": "功能权限包管理",
+          "modules": [],
+          "url": "/admin/funcPerMgr/funcPerInfo"
+        },
+        {
+          "id": "01006",
+          "title": "自定义权限管理",
+          "modules": [],
+          "url": "/admin/customPermMgr/customPermInfo"
+        },
+        {
+          "id": "01099",
+          "title": "test",
+          "modules": [
+            {
+              "id": "01099001",
+              "title": "test",
+              "modules": [],
+              "url": ""
+            },
+            {
+              "id": "01099002",
+              "title": "test",
+              "modules": [],
+              "url": ""
+            }
+          ],
+          "url": ""
+        }
+      ],
+      "url": null
     },
     {
-      "title": "角色申请",
-      "id":"5",
-      "url":"/1/142"
-    }
-  ]},{"title": "开发平台", "active":false, "modules":[
-    {
-      "url": "iframe.html",
-      "id":"6",
-      "title": "服务管理"
+      "id": "02",
+      "title": "门户",
+      "modules": [
+        {
+          "id": "02000",
+          "title": "登录成功页",
+          "modules": [],
+          "url": "/portal/loginSuccess"
+        },
+        {
+          "id": "02001",
+          "title": "学生首页",
+          "modules": [],
+          "url": "/portal/student/home"
+        },
+        {
+          "id": "02002",
+          "title": "教师首页",
+          "modules": [],
+          "url": "/portal/teacher/home"
+        },
+        {
+          "id": "02003",
+          "title": "应用时间控制",
+          "modules": [],
+          "url": "/portal/formSetting/appTimeSet"
+        },
+        {
+          "id": "02004",
+          "title": "字段显示类型配置",
+          "modules": [],
+          "url": "/portal/formSetting/fieldViewSet"
+        },
+        {
+          "id": "02005",
+          "title": "填报查看",
+          "modules": [],
+          "url": "/portal/formSetting/formCheck_view"
+        },
+        {
+          "id": "02006",
+          "title": "填报一级审核",
+          "modules": [],
+          "url": "/portal/formSetting/formCheck_first"
+        },
+        {
+          "id": "02007",
+          "title": "填报二级审核",
+          "modules": [],
+          "url": "/portal/formSetting/formCheck_second"
+        },
+        {
+          "id": "02008",
+          "title": "填报完成度",
+          "modules": [],
+          "url": "/portal/formSetting/percentView"
+        }
+      ],
+      "url": null
     },
     {
-      "url": "22",
-      "id":"7",
-      "title": "APP管理"
+      "id": "05",
+      "title": "服务管理控制台",
+      "modules": [
+        {
+          "id": "05000",
+          "title": "登录成功页",
+          "modules": [],
+          "url": "/sop/loginSuccess"
+        },
+        {
+          "id": "05001",
+          "title": "应用注册",
+          "modules": [],
+          "url": "/sop/app/appList"
+        },
+        {
+          "id": "05002",
+          "title": "服务管理",
+          "modules": [],
+          "url": "/sop/service/serviceList"
+        },
+        {
+          "id": "05003",
+          "title": "服务监控",
+          "modules": [],
+          "url": "/sop/monitor/serviceMonitor"
+        }
+      ],
+      "url": null
+    },
+    {
+      "id": "06",
+      "title": "开发者网站",
+      "modules": [
+        {
+          "id": "06002",
+          "title": "管理中心",
+          "modules": [],
+          "url": "/dev-web/service/serviceList"
+        }
+      ],
+      "url": null
+    },
+    {
+      "id": "07",
+      "title": "食堂管理系统",
+      "modules": [
+        {
+          "id": "07000",
+          "title": "用户管理",
+          "modules": [
+            {
+              "id": "070000000",
+              "title": "个人信息维护",
+              "modules": [],
+              "url": "/canteenMgr/userMgr/staInfoMgr"
+            },
+            {
+              "id": "070000001",
+              "title": "部门维护",
+              "modules": [],
+              "url": "/canteenMgr/depMgr/depInfoMgr"
+            },
+            {
+              "id": "070000002",
+              "title": "个人信息",
+              "modules": [],
+              "url": "/canteenMgr/userMgr/staInfo"
+            },
+            {
+              "id": "070000003",
+              "title": "个人消费信息",
+              "modules": [],
+              "url": "/canteenMgr/userMgr/viewCom"
+            }
+          ],
+          "url": null
+        },
+        {
+          "id": "07001",
+          "title": "一卡通管理",
+          "modules": [
+            {
+              "id": "070010010",
+              "title": "卡号管理",
+              "modules": [],
+              "url": "/canteenMgr/cardMgr/cardInfoMgr"
+            },
+            {
+              "id": "070010011",
+              "title": "补贴发放",
+              "modules": [],
+              "url": "/canteenMgr/cardMgr/subsidyMgr"
+            }
+          ],
+          "url": null
+        },
+        {
+          "id": "07002",
+          "title": "菜单管理",
+          "modules": [
+            {
+              "id": "070020020",
+              "title": "菜单发布",
+              "modules": [],
+              "url": "/canteenMgr/menuMgr/menuInfoMgr"
+            }
+          ],
+          "url": null
+        },
+        {
+          "id": "07003",
+          "title": "员工心声",
+          "modules": [
+            {
+              "id": "070030030",
+              "title": "投诉与建议",
+              "modules": [],
+              "url": "/canteenMgr/adviceMgr/adviceMgr"
+            },
+            {
+              "id": "070030031",
+              "title": "投诉与建议（员工）",
+              "modules": [],
+              "url": "/canteenMgr/adviceMgr/staAdviceMgr"
+            }
+          ],
+          "url": null
+        },
+        {
+          "id": "07004",
+          "title": "投票管理",
+          "modules": [
+            {
+              "id": "070040040",
+              "title": "投票管理",
+              "modules": [],
+              "url": "/canteenMgr/voteMgr/votesInfoMgr"
+            },
+            {
+              "id": "070040041",
+              "title": "投票管理(员工)",
+              "modules": [],
+              "url": "/canteenMgr/voteMgr/staVotesInfoMgr"
+            }
+          ],
+          "url": null
+        }
+      ],
+      "url": null
+    },
+    {
+      "id": "10",
+      "title": "短信接口",
+      "modules": [],
+      "url": null
     }
-  ]}
-]
+  ],
+  "error": null
+}

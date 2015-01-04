@@ -1,0 +1,22 @@
+<div class="oni-searchbar-container">
+    <div class="oni-searchbar-alternative">
+        <div class="oni-searchbar-label" ms-text="alterLabel">
+
+        </div>
+        <div class="oni-searchbar-container" ms-css-width="containerWidth">
+
+        </div>
+    </div>
+    <div class="oni-searchbar-selected">
+        <div class="oni-searchbar-label" ms-text="selectedLabel">
+
+        </div>
+        <div class="oni-searchbar-container" ms-css-width="containerWidth">
+            <div class="oni-searchbar-selected-filter" ms-repeat-filter="selectedFilters" ms-hover="oni-searchbar-selected-filter-over">
+                <span ms-text="filter.label"></span><span>：</span>
+                <span ms-text="filter.value"></span>
+                <div class="oni-searchbar-close" ms-if="filter.removable" ms-click="removeSelectedFilter(filter.label)" ms-hover="oni-searchbar-close-over"></div>
+            </div>
+        </div>
+    </div>
+</div>

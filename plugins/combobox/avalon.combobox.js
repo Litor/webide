@@ -3,7 +3,7 @@
  * @enName combobox
  * @introduce
  */
-define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", "./mmRequest"], function(avalon, template) {
+define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css","../selectionpanel/avalon.selectionpanel.js",  "./mmRequest"], function(avalon, template) {
 
     var undefine = void 0
 
@@ -13,25 +13,23 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
         vmId = data.comboboxId;
         options.template = options.getTemplate(template, options);
 
-        var async = {
-            enable: false,
-            url: "",
-            contentType: "application/x-www-form-urlencoded",
-            dataType: "json",
-            autoParam: [],
-            dataFilter: undefine,
-            otherParam: {},
-            type: "post"
-        }
-
         var inited, id = +(new Date());
 
-        options.pages = [{page:1, active:true}, {page:2, active:false},{page:3, active:false}];
-        options.selectedValue = '';
-        options.selectedKey= '';
-        options.previous = false;
-        options.next = false;
         options.panelVisible = false;
+
+        options["selectionpanel_"+id] = {
+            datatype: options.datatype,
+            localdata:options.localdata,
+            url: options.url,
+            pagesize:options.pagesize,
+            showpages: options.showPages,
+            searchable: options.searchable,
+            width: options.boxwidth,
+            callback: function(key, value){
+                vmodel.selectedKey = key;
+                vmodel.selectedValue = value;
+            }
+        }
 
         var vm = avalon.mix({
             $id : vmId,
@@ -39,56 +37,24 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
             $skipArray : ["widgetElement", "template"],
             $uid : id,
             items:[],
+            total:0,
             currentPage:1,
+            selectedKey:'',
+            selectedValue:'',
             showPanel: function (e) {
               vmodel.panelVisible = !vmodel.panelVisible;
                 if(vmodel.panelVisible){
-                    setItems();
+                    avalon.vmodels["selectionpanel_"+id].getFocus();
+                    avalon.vmodels["selectionpanel_"+id].reload();
                 }
                 e.stopPropagation();
-            },
-            clearWhenNoSelect : function(){
-                if(vmodel.selectedKey == ""){
-                    vmodel.selectedValue = "";
-                }
-            },
-            search: function () {
-                vmodel.panelVisible = true;
-                if(vmodel.dataType == "server"){
-                    vmodel.selectedKey = "";
-                    getServerData(vmodel.selectedValue);
-                }else if(vmodel.dataType == "local"){
-                    vmodel.selectedKey = "";
-                    reloadLocalData(vmodel.selectedValue);
-                }
-            },
-            changePage: function (e, page) {
-                changePageAction(page);
-                e.stopPropagation();
-            },
-            selectedItem: function (key, value) {
-                vmodel.selectedValue = value;
-                vmodel.selectedKey = key;
-            },
-            nextPage: function (e) {
-                e.stopPropagation();
-                if(vmodel.next) return;
-                vmodel.currentPage++;
-                getServerData();
-            },
-            prevPage: function (e) {
-                e.stopPropagation();
-                if(vmodel.previous) return;
-                vmodel.currentPage--;
-                getServerData();
             },
             $init :  function (continueScan) {
                 if (inited) return;
                 inited = true;
-                vmodel.template = vmodel.template.replace(/\{\{MS_COMBOX_ID\}\}/g, id);
+                vmodel.template = vmodel.template.replace(/\{\{SELECTIONPANEL\}\}/g, "selectionpanel_"+id);
                 element.innerHTML = vmodel.template;
 
-                setItems();
                 if (continueScan) {
                     continueScan();
                 }
@@ -101,117 +67,23 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
             vmodel.panelVisible = false;
         });
 
-        function reloadLocalData(keyword){
-            vmodel.items = [];
-            for(var i = 0; i < vmodel.localData.length; i++){
-                if(vmodel.localData[i].value.indexOf(keyword)>=0){
-                    vmodel.items.push(vmodel.localData[i]);
-                }
-            }
-        }
-        function changePageAction(page){
-            vmodel.currentPage = page;
-            for(var i = 0; i < vmodel.pages.length; i++){
-                if(page == vmodel.pages[i].page){
-                    vmodel.pages[i].active = true;
-                }else{
-                    vmodel.pages[i].active = false;
-                }
-            }
-
-            // 切换页码刷新数据
-            getServerData();
-
-        }
-
-        function getServerData(keyword){
-            async.url = vmodel.url;
-            var data = {
-                pagesize: vmodel.pageSize,
-                pageindex: vmodel.currentPage,
-                keyword: keyword
-            }
-
-            avalon.ajax(avalon.mix({
-                    data: data
-                },
-                async)).done(function(res) {
-                if(typeof(res) === 'object'){
-                    vmodel.total = res.total;
-                    vmodel.items = res.options;
-                    vmodel.total = 61;
-                    resetPages(vmodel.total);
-                }else{
-                    throw Error("远程数据错误"+res);
-                }
-
-            });
-        }
-
-        function resetPages(total){
-            var currentPage = vmodel.currentPage;
-            var totalPage = Math.ceil(total/vmodel.pageSize);
-            var showPages = vmodel.showPages;
-            var bottom = (Math.floor((currentPage-1)/showPages))*showPages+1;
-            var top = (Math.floor((currentPage-1)/showPages))*showPages+showPages;
-            top = top <= totalPage?top:totalPage;
-
-            vmodel.pages.splice(0, vmodel.pages.length);
-
-            for(var i = bottom; i <= top; i++){
-                var page = {page:i};
-                if(i == currentPage){
-                    page.active = true;
-                }
-                vmodel.pages.push(page);
-            }
-
-            if(currentPage == 1){
-                vmodel.previous = true;
-            }else{
-                vmodel.previous = false;
-            }
-            if(currentPage == totalPage){
-                vmodel.next = true;
-            }else{
-                vmodel.next = false;
-            }
-        }
-
-        function setItems(){
-            if(vmodel.localData && vmodel.dataType == 'local'){
-                vmodel.items = vmodel.localData;
-            }else if(vmodel.dataType == 'server' && vmodel.url ){
-                getServerData();
-            }else{
-                throw Error("数据配置错误");
-            }
-        }
         return vmodel;
     };
 
     widget.defaults = {
         /**
-         * dataType:数据来源类型 local or server
+         * datatype:数据来源类型 local or server
          * */
-        dataType:'local',
+        datatype:'server',
         /**
-         * localData:本地数据
+         * localdata:本地数据
          * 格式:{key:'', value:''}
          * */
-        localData:[{key:1, value:'安徽'}, {key:2, value:'江苏'}],
+        localdata:[{key:1, value:'安徽'}, {key:2, value:'江苏'}],
         /**
          * url: 远程数据url
          * */
         url:'./data.json',
-        /**
-         * currentPage: 当前页码
-         * */
-        currentPage:1,
-        /**
-         * total: 记录总条数
-         * */
-        total: 0,
         /**
          * pageSize: 分页大小
          * */
@@ -225,9 +97,9 @@ define(["avalon", "text!./avalon.combobox.html", "css!./avalon.combobox.css", ".
          * */
          id:'province',
         /**
-         * boxWidth: 下拉面板的宽度
+         * boxwidth: 下拉面板的宽度
          * */
-        boxWidth:'100%',
+        boxwidth:'100%',
         /**
          * width: 下拉框宽度
          * */

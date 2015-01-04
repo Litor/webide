@@ -1,0 +1,79 @@
+.oni-searchcombox-container{
+    border: 1px solid white;
+    background-color: #337ab7;
+    margin-right: 3px;
+    padding-left: 4px;
+    padding-right: 4px;
+    cursor: default;
+    color: white;
+    height: 20px;
+    line-height: 20px;
+    display: inline-block;
+    font-family: "微软雅黑", "宋体", Arial, sans-serif;
+    font-size: 12px;
+    box-sizing: content-box;
+}
+
+.oni-searchcombox-container *{
+    margin: 0;
+    padding: 0;
+}
+.oni-searchcombox-label{
+    display: inline-block;
+}
+.oni-searchcombox-icon{
+    margin-top: -3px;
+    margin-left: 2px;
+    width: 13px;
+    height: 10px;
+    display: inline-block;
+    background: url('images/select.gif');
+    vertical-align: middle;
+}
+
+.oni-searchcombox-listpanel{
+    position: absolute;
+    color: black;
+    z-index: 9999;
+    border: 1px solid #aed1ff;
+    background-color: #fcFFFF;
+    overflow: hidden;
+}
+.oni-searchcombox-keyword{
+    width: 80%;
+    border: 1px solid #eee;
+}
+
+.oni-searchcombox-listpanel>ul{
+    list-style-type: disc;
+    list-style: none;
+    padding: 5px 0;
+    margin: 2px 0 0;
+}
+
+.oni-searchcombox-listpanel>ul>li{
+    line-height: 18px;
+    display: list-item;
+}
+
+.oni-searchcombox-listpanel>ul>li>a{
+    display: block;
+    padding: 3px 6px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #333;
+    white-space: nowrap;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.oni-searchcombox-listpanel>ul>li>a:hover{
+    background-color: #4388d5;
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#afc1ff),to(#679bde));
+    background-image: -webkit-linear-gradient(top, #afc1ff, #679bde);
+    background-image: linear-gradient(to bottom, #afc1ff, #679bde);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF617482',endColorstr='#FF506371',GradientType=0);
+    color: white;
+}

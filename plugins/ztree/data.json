@@ -1,5 +1,5 @@
 [
-  { "id":1, "pId":0, "name":"主菜单 1", "open":true},
+  { "id":1, "pId":0, "name":"主菜单 1", "open":true, "params":"test"},
   { "id":11, "pId":1, "name":"子菜单 1-1"},
   { "id":111, "pId":11, "name":"叶子节点 1-1-1"},
   { "id":112, "pId":11, "name":"叶子节点 1-1-2"},

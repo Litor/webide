@@ -1,24 +1,24 @@
-define(["avalon", "./avalon.rightmenu.js", "./mmRequest"], function(avalon, rightmenu) {
+define(["avalon", "./avalon.contextmenu.js", "./mmRequest"], function(avalon, rightmenu) {
     var undefine = void 0
 
     function createFile(options){
-        alert(options.path)
+        alert("Create File ->id:" + options.id)
         avalon.ajax(avalon.mix({
-                data: options.path
+                data: {id:options.id, params:options.params}
             },
             async)).done(function(res) {
-            avalon.vmodels[options.fileExplorerId].reload();
+
         }).fail(function(res) {
-           alert();
+
         })
     }
 
     function createFolder(options){
-
+        alert("Create Folder ->id:" + options.id)
     }
 
     function rename(options){
-
+        alert("rename ->id:" + options.id)
     }
 
     var async = {
@@ -32,7 +32,7 @@ define(["avalon", "./avalon.rightmenu.js", "./mmRequest"], function(avalon, righ
         type: "post"
     }
 
-    avalon.ui.rightmenu.AddExtention({
+    avalon.ui.contextmenu.AddExtention({
         menu:[
             {id: 'createFile', value: '新建文件', click: createFile},
             {id: 'createFolder', value: '新建文件夹', click: createFolder},

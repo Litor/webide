@@ -3,7 +3,7 @@
  * @enName ztree
  * @introduce
  */
-define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRequest"], function(avalon, template) {
+define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRequest", "../contextmenu/avalon.contextmenu.fileopt.js"], function(avalon, template) {
     /**
     *   templateArr = template.split('MS_OPTION_EJS');
     */
@@ -15,6 +15,11 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
     function getCnt(){
         return count++;
     }
+
+    var onExpand = function (event, treeId, treeNode) {
+        onExpandAction(treeNode)
+    };
+
     var setting = {
         view: {
             showLine: false,
@@ -27,7 +32,8 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
             }
         },
         callback: {
-            beforeClick: beforeClick
+            beforeClick: beforeClick,
+            onExpand:onExpand
         },
         edit:{
             enable: false,
@@ -35,6 +41,8 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
         }
 
     }
+
+    var onExpandAction = null;
 
     var async = {
         enable: false,
@@ -60,6 +68,7 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
             widgetElement : element,
             $skipArray : ["widgetElement", "template"],
             $uid : "ztree_"+getCnt(),
+
             $init :  function (continueScan) {
                 if (inited) return;
                 inited = true;
@@ -71,7 +80,8 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
                     async)).done(function(res) {
                     if(typeof(res) === 'object'){
                         zTree_Menu = jQuery.fn.zTree.init(jQuery(element.children[0]), setting, res);
-
+                        addNodeContextMenu(zTree_Menu.getNodes());
+                        avalon.scan(element, vmodel);
                     }else{
                         throw Error("菜单读取错误"+res);
                     }
@@ -84,7 +94,30 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
             }
         }, options);
 
+
         var vmodel = avalon.define(vm);
+
+        function addNodeContextMenu(nodes){
+            for(var i = 0; i < nodes.length; i++){
+                var nodeId = nodes[i].tId + "_span";
+                var nodeDOM = document.getElementById(nodeId);
+                if(nodeDOM && !nodeDOM.hasAttribute("avalonctrl")){
+                    nodeDOM.setAttribute("ms-widget", "contextmenu");
+                    if(nodes[i].params){
+                        nodeDOM.setAttribute("data-params", nodes[i].params);
+                    }
+                    nodeDOM.setAttribute("data-id", nodes[i].id);
+                }
+                if(nodes[i].isParent){
+                    addNodeContextMenu(nodes[i].children);
+                }
+            }
+        }
+
+        onExpandAction = function (treeNode) {
+            addNodeContextMenu(treeNode.children);
+            avalon.scan(element, vmodel);
+        }
 
         return vmodel;
     };
@@ -92,16 +125,20 @@ define(["avalon", "text!./avalon.ztree.html", "css!./avalon.ztree.css", "../mmRe
     function beforeClick(treeId, node) {
         if (node.isParent) {
             zTree_Menu.expandNode(node);
+            onExpandAction(node);
         }
         return !node.isParent;
     }
 
-    function onClick(e, treeId, node) {
-        alert("Do what you want to do!");
-    }
-
     widget.defaults = {
+        /**
+         * url: 树节点数据url
+         * */
         url:'data.json',
+        /**
+         * contextMenu: 右键菜单配置
+         * */
+        contextMenu:[],
         getTemplate: function (str, options) {
             return str;
         }

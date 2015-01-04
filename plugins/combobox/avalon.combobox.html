@@ -1,28 +1,15 @@
 <div class="oni-combobox-container"  ms-css-width="width">
     <div class="input-group">
-        <input type="text" class="form-control dropdown-toggle"  ms-duplex="selectedValue" ms-keyup="search"
-               ms-click="showPanel($event)" ms-change="clearWhenNoSelect">
+        <div type="text" class="form-control oni-combobox-input" ms-css-width="width-23" ms-text="selectedValue"
+               ms-click="showPanel($event)"></div>
         <input type="hidden" ms-attr-value="selectedKey" ms-attr-id="{{id}}">
-        <div class="input-group-btn dropdown-toggle" ms-click="showPanel($event)">
+        <div class="input-group-btn dropdown-toggle" style="width:23px" ms-click="showPanel($event)">
             <button type="button" class="btn btn-default">
                 <span class="caret"></span>
             </button>
         </div>
-        <ul class="dropdown-menu pull-left" ms-css-width="boxWidth" ms-visible="panelVisible">
-            <li ms-repeat-item="items">
-                <a href="#" ms-text="item.value"
-                   ms-click="selectedItem(item.key, item.value)"></a>
-            </li>
-            <li style="height: 30px;" ms-if="dataType == 'server'"><ul class="pagination">
-                <li ms-class-100="disabled:previous" ms-click="prevPage($event)"><a href="#">&laquo;</a></li>
-                <li ms-repeat-page="pages"
-                    ms-class="active:page.active"
-                    ms-click="changePage($event, page.page)">
-                    <a href="#" ms-text="page.page"></a>
-                </li>
-                <li ms-class-101="disabled:next" ms-click="nextPage($event)"><a href="#">&raquo;</a></li>
-            </ul></li>
-            <li ms-if="items.length == 0" ms-text="noResult"></li>
-        </ul>
+        <div ms-widget="selectionpanel, {{SELECTIONPANEL}}, {{SELECTIONPANEL}}"  ms-visible="panelVisible">
+
+        </div>
     </div>
 </div>

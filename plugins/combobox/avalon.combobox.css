@@ -5,3 +5,7 @@
 .oni-combobox-container .pagination{
     margin:4px;
 }
+.oni-combobox-input{
+    display: inline-block;
+    height: 25px;
+}

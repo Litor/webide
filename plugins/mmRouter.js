@@ -1,4 +1,5 @@
 define(["mmHistory"], function() {
+
     function Router() {
         var table = {}
         "get,post,delete,put".replace(avalon.rword, function(name) {
@@ -6,6 +7,7 @@ define(["mmHistory"], function() {
         })
         this.routingTable = table
     }
+
     function parseQuery(url) {
         var array = url.split("?"), query = {}, path = array[0], querystring = array[1]
         if (querystring) {
@@ -24,6 +26,7 @@ define(["mmHistory"], function() {
             query: query
         }
     }
+
     var placeholder = /([:*])(\w+)|\{(\w+)(?:\:((?:[^{}\\]+|\\.|\{(?:[^{}\\]+|\\.)*\})+))?\}/g
     Router.prototype = {
         error: function(callback) {
@@ -31,8 +34,9 @@ define(["mmHistory"], function() {
         },
         _pathToRegExp: function(pattern, opts) {
             var keys = opts.keys = [],
-// segments = opts.segments = [],
+            //      segments = opts.segments = [],
                 compiled = '^', last = 0, m, name, regexp, segment;
+
             while ((m = placeholder.exec(pattern))) {
                 name = m[2] || m[3]; // IE[78] returns '' for unmatched groups instead of null
                 regexp = m[4] || (m[1] == '*' ? '.*' : 'string')
@@ -47,17 +51,17 @@ define(["mmHistory"], function() {
                 }
                 keys.push(key)
                 compiled += quoteRegExp(segment, regexp, false)
-// segments.push(segment)
+                //  segments.push(segment)
                 last = placeholder.lastIndex
             }
             segment = pattern.substring(last);
             compiled += quoteRegExp(segment) + (opts.strict ? opts.last : "\/?") + '$';
-            var sensitive = typeof opts.caseInsensitive === "boolean" ? opts.caseInsensitive : true
-// segments.push(segment);
-            opts.regexp = new RegExp(compiled, sensitive ? 'i' : undefined);
+            //  segments.push(segment);
+            opts.regexp = new RegExp(compiled, opts.caseInsensitive ? 'i' : undefined);
             return opts
+
         },
-//添加一个路由规则
+        //添加一个路由规则
         add: function(method, path, callback, opts) {
             var array = this.routingTable[method.toLowerCase()]
             if (path.charAt(0) !== "/") {
@@ -71,7 +75,7 @@ define(["mmHistory"], function() {
             }
             avalon.Array.ensure(array, this._pathToRegExp(path, opts))
         },
-//判定当前URL与已有状态对象的路由规则是否符合
+        //判定当前URL与已有状态对象的路由规则是否符合
         route: function(method, path, query) {
             path = path.trim()
             var states = this.routingTable[method]
@@ -86,7 +90,7 @@ define(["mmHistory"], function() {
                     if (keys.length) {
                         this._parseArgs(args, el)
                     }
-                    return el.callback.apply(el, args)
+                    return  el.callback.apply(el, args)
                 }
             }
             if (this.errorback) {
@@ -118,7 +122,6 @@ define(["mmHistory"], function() {
         },
         navigate: function(hash) {
             var parsed = parseQuery(hash)
-            avalon.history.updateLocation(hash)
             this.route("get", parsed.path, parsed.query)
         },
         /* *
@@ -131,12 +134,12 @@ define(["mmHistory"], function() {
          path into the parameter 'path'.
          `'/files/*path'` - ditto.
          */
-// avalon.router.get("/ddd/:dddID/",callback)
-// avalon.router.get("/ddd/{dddID}/",callback)
-// avalon.router.get("/ddd/{dddID:[0-9]{4}}/",callback)
-// avalon.router.get("/ddd/{dddID:int}/",callback)
-// 我们甚至可以在这里添加新的类型，avalon.router.$type.d4 = { pattern: '[0-9]{4}', decode: Number}
-// avalon.router.get("/ddd/{dddID:d4}/",callback)
+        // avalon.router.get("/ddd/:dddID/",callback)
+        // avalon.router.get("/ddd/{dddID}/",callback)
+        // avalon.router.get("/ddd/{dddID:[0-9]{4}}/",callback)
+        // avalon.router.get("/ddd/{dddID:int}/",callback)
+        // 我们甚至可以在这里添加新的类型，avalon.router.$type.d4 = { pattern: '[0-9]{4}', decode: Number}
+        // avalon.router.get("/ddd/{dddID:d4}/",callback)
         $types: {
             date: {
                 pattern: "[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[1-2][0-9]|3[0-1])",
@@ -145,7 +148,7 @@ define(["mmHistory"], function() {
                 }
             },
             string: {
-                pattern: "[^\\/]*"
+                pattern: "[^\/]*"
             },
             bool: {
                 decode: function(val) {
@@ -157,12 +160,14 @@ define(["mmHistory"], function() {
                 decode: function(val) {
                     return parseInt(val, 10);
                 },
-                pattern: "\\d+"
+                pattern: "\d+"
             }
         }
     }
+
+
     "get,put,delete,post".replace(avalon.rword, function(method) {
-        return Router.prototype[method] = function(a, b, c) {
+        return  Router.prototype[method] = function(a, b, c) {
             this.add(method, a, b, c)
         }
     })
@@ -182,6 +187,7 @@ define(["mmHistory"], function() {
             return false
         }
     }
+
     if (supportLocalStorage()) {
         Router.prototype.getLastPath = function() {
             return localStorage.getItem("msLastPath")
@@ -190,6 +196,9 @@ define(["mmHistory"], function() {
             localStorage.setItem("msLastPath", path)
         }
     }
+
+
+
     function escapeCookie(value) {
         return String(value).replace(/[,;"\\=\s%]/g, function(character) {
             return encodeURIComponent(character)
@@ -204,7 +213,9 @@ define(["mmHistory"], function() {
         var m = String(document.cookie).match(new RegExp('(?:^| )' + name + '(?:(?:=([^;]*))|;|$)')) || ["", ""]
         return decodeURIComponent(m[1])
     }
+
     avalon.router = new Router
+
     return avalon
 })
 /*
@@ -254,9 +265,12 @@ define(["mmHistory"], function() {
  </ul>
  <div style="color:red">{{currPath}}</div>
  <div style="height: 600px;width:1px;">
+
  </div>
  <p id="eee">会定位到这里</p>
  </div>
+
  </body>
  </html>
+
  */

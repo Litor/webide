@@ -1,0 +1,19 @@
+    <ul class="dropdown-menu pull-left" ms-css-width="width" style="display: block">
+         <li  style="height: 30px;" >
+             <input type="text" class="oni-searchcombox-keyword"  ms-duplex="keyword" ms-attr-placeholder="placeholder" ms-click="fixPanelHidden($event)" ms-keyup="search">
+         </li>
+        <li ms-repeat-item="items">
+            <a href="#" ms-text="item.value"
+               ms-click="selectedItem(item.key, item.value)"></a>
+        </li>
+        <li style="height: 30px;" ms-if="datatype == 'server'"><ul class="pagination">
+            <li ms-class-100="disabled:previous" ms-click="prevPage($event)"><a href="#">&laquo;</a></li>
+            <li ms-repeat-page="pages"
+                ms-class="active:page.active"
+                ms-click="changePage($event, page.page)">
+                <a href="#" ms-text="page.page"></a>
+            </li>
+            <li ms-class-101="disabled:next" ms-click="nextPage($event)"><a href="#">&raquo;</a></li>
+        </ul></li>
+        <li ms-if="items.length == 0" ms-text="noResult"></li>
+    </ul>

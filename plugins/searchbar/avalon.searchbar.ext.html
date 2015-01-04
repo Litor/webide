@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>searchbar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="../../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../lib/jquery.js"></script>
+    <script src="../../lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../avalon.js"></script>
+    <script src="../highlight/shCore.js"></script>
+    <script>
+
+        require(["searchbar/avalon.searchbar"], function() {
+            avalon.define("test", function(vm) {
+                vm.name = "tstttt";
+            })
+
+            avalon.scan();
+        })
+    </script>
+</head>
+<body>
+<style>
+
+</style>
+<div ms-controller="test">
+    <div ms-widget="searchbar">
+        <filter type="combox" label="院系" datatype="local" pagesize="10" showpages="5" url="http://www.baidu.com" width="200" removable="true">
+            <option key="1" value="安徽"></option>
+            <option key="2" value="江苏"></option>
+            <option key="3" value="浙江"></option>
+        </filter>
+        <filter type="combox" label="专业" datatype="local" pagesize="10" showpages="5" url="http://www.baidu.com" width="200" >
+            <option key="1" value="安徽"></option>
+            <option key="2" value="江苏"></option>
+            <option key="3" value="浙江"></option>
+            <option key="4" value="山东"></option>
+        </filter>
+    </div>
+</div>
+
+</body>
+</html>
